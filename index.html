@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบฐานข้อมูลศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- LANDING PAGE VIEW -->
+    <div id="landing-view" class="container view-active">
+        <header class="header">
+            <div class="logo-container">
+                <i class="fa-solid fa-leaf logo-icon"></i>
+            </div>
+            <h1 class="main-title">ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</h1>
+            <h2 class="sub-title">Phrae Queen Sirikit Sericulture Center</h2>
+            <div class="intro-card">
+                <p class="intro-text">
+                    ยินดีต้อนรับเข้าสู่ระบบฐานข้อมูลกลาง ศูนย์หม่อนไหมเฉลิมพระเกียรติสมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ แพร่ 
+                    ศูนย์รวมข้อมูลสารสนเทศเพื่อการบริหารจัดการงานด้านหม่อนไหมอย่างมีประสิทธิภาพ รวดเร็ว และแม่นยำ 
+                </p>
+            </div>
+            
+            <div class="login-action-container">
+                <button id="login-btn" class="login-btn">
+                    <span>เข้าสู่ระบบ (Enter System)</span>
+                    <i class="fa-solid fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="system-grid">
+            <!-- System 1 -->
+            <div class="system-card">
+                <div class="card-icon-wrapper">
+                    <i class="fa-solid fa-users icon"></i>
+                </div>
+                <h3 class="card-title">ฐานข้อมูลเกษตรกร</h3>
+                <p class="card-description">
+                    ระบบจัดการข้อมูลประวัติเกษตรกร พื้นที่ปลูกหม่อนเลี้ยงไหม และการเข้าร่วมโครงการต่างๆ เพื่อการติดตามและสนับสนุนอย่างทั่วถึง
+                </p>
+            </div>
+
+            <!-- System 2 -->
+            <div class="system-card">
+                <div class="card-icon-wrapper">
+                    <i class="fa-solid fa-boxes-stacked icon"></i>
+                </div>
+                <h3 class="card-title">ระบบบริหารคลังไข่ไหม</h3>
+                <p class="card-description">
+                    ระบบบริหารจัดการและติดตามสถานะคลังไข่ไหม การรับเข้า การเบิกจ่าย และควบคุมปริมาณคงคลังให้มีประสิทธิภาพสูงสุด
+                </p>
+            </div>
+
+            <!-- System 3 -->
+            <div class="system-card">
+                <div class="card-icon-wrapper">
+                    <i class="fa-solid fa-calculator icon"></i>
+                </div>
+                <h3 class="card-title">ระบบคำนวณการเก็บไข่ไหม</h3>
+                <p class="card-description">
+                    เครื่องมือช่วยคำนวณและพยากรณ์ผลผลิต การเก็บเกี่ยวไข่ไหมตามรอบการเลี้ยง เพื่อวางแผนการผลิตได้อย่างแม่นยำ
+                </p>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2026 ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่ | กรมหม่อนไหม กระทรวงเกษตรและสหกรณ์</p>
+        </footer>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div id="dashboard-view" class="dashboard-container view-hidden">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-leaf"></i>
+                <span>ศูนย์หม่อนไหมฯ แพร่</span>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-sys="farmer">
+                    <i class="fa-solid fa-users"></i>
+                    <span>ฐานข้อมูลเกษตรกร</span>
+                </button>
+                <button class="nav-item" data-sys="inventory">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <span>ระบบบริหารคลังไข่ไหม</span>
+                </button>
+                <button class="nav-item" data-sys="calculator">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>ระบบคำนวณการเก็บไข่ไหม</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="nav-item logout-btn">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>กลับหน้าหลัก</span>
+                </button>
+            </div>
+        </aside>
+        <main class="dashboard-main">
+            <div class="iframe-container">
+                <!-- Iframe to load the google script -->
+                <iframe id="content-frame" src="about:blank" frameborder="0"></iframe>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
