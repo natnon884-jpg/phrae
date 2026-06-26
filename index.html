@@ -3,113 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบฐานข้อมูลศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="background-animation"></div>
+    <title>ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</title>
     
-    <!-- LANDING PAGE VIEW -->
-    <div id="landing-view" class="container view-active">
-        <header class="header">
-            <div class="logo-container">
-                <i class="fa-solid fa-leaf logo-icon"></i>
-            </div>
-            <h1 class="main-title">ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</h1>
-            <h2 class="sub-title">Phrae Queen Sirikit Sericulture Center</h2>
-            <div class="intro-card">
-                <p class="intro-text">
-                    ยินดีต้อนรับเข้าสู่ระบบฐานข้อมูลกลาง ศูนย์หม่อนไหมเฉลิมพระเกียรติสมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ แพร่ 
-                    ศูนย์รวมข้อมูลสารสนเทศเพื่อการบริหารจัดการงานด้านหม่อนไหมอย่างมีประสิทธิภาพ รวดเร็ว และแม่นยำ 
-                </p>
-            </div>
-            
-            <div class="login-action-container">
-                <button id="login-btn" class="login-btn">
-                    <span>เข้าสู่ระบบ (Enter System)</span>
-                    <i class="fa-solid fa-sign-in-alt"></i>
-                </button>
-            </div>
-        </header>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        <main class="system-grid">
-            <!-- System 1 -->
-            <div class="system-card">
-                <div class="card-icon-wrapper">
-                    <i class="fa-solid fa-users icon"></i>
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #fdfafc;
+            /* สร้างพื้นหลัง Gradient ให้คล้ายกับรูปภาพต้นฉบับ */
+            background-image: 
+                radial-gradient(at 10% 20%, hsla(286, 40%, 88%, 1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, hsla(340, 50%, 92%, 1) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, hsla(45, 60%, 90%, 1) 0px, transparent 50%),
+                radial-gradient(at 10% 90%, hsla(200, 50%, 92%, 1) 0px, transparent 50%);
+            background-attachment: fixed;
+            background-size: cover;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .primary-bg { background-color: #6d3264; }
+        .primary-text { color: #6d3264; }
+        .primary-hover:hover { background-color: #55254d; }
+
+        /* Custom Scrollbar สำหรับ iframe */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c5a3c0; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6d3264; }
+
+        /* Iframe loading animation */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6d3264;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- ==================== หน้า Landing Page (หน้าแรก) ==================== -->
+    <div id="landing-view" class="flex-grow flex flex-col items-center justify-center p-4 md:p-8 transition-opacity duration-500">
+        
+        <!-- Header & Logo -->
+        <div class="text-center mb-8 mt-4 md:mt-10">
+            <div class="w-16 h-16 md:w-20 md:h-20 primary-bg rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <i class="fa-solid fa-leaf text-white text-3xl md:text-4xl"></i>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-semibold primary-text mb-2">ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</h1>
+            <p class="text-gray-500 text-sm md:text-base">Phrae Queen Sirikit Sericulture Center</p>
+        </div>
+
+        <!-- Intro Box -->
+        <div class="bg-white/80 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-2xl p-6 max-w-3xl text-center mb-8 border border-white/50">
+            <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+                ยินดีต้อนรับเข้าสู่ระบบฐานข้อมูลกลาง ศูนย์หม่อนไหมเฉลิมพระเกียรติสมเด็จพระนางเจ้าสิริกิติ์ 
+                พระบรมราชินีนาถ แพร่ ศูนย์รวมข้อมูลสารสนเทศเพื่อการบริหารจัดการงานด้านหม่อนไหมอย่างมี
+                ประสิทธิภาพ รวดเร็ว และแม่นยำ
+            </p>
+        </div>
+
+        <!-- Login Button -->
+        <button onclick="enterSystem()" class="primary-bg primary-hover text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 mb-12">
+            เข้าสู่ระบบ (Enter System) <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </button>
+
+        <!-- Feature Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full mb-10">
+            <!-- Card 1 -->
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white flex flex-col items-center text-center transform transition-transform hover:scale-105">
+                <div class="w-14 h-14 bg-green-50 text-green-600 rounded-full flex items-center justify-center text-2xl mb-4">
+                    <i class="fa-solid fa-users"></i>
                 </div>
-                <h3 class="card-title">ฐานข้อมูลเกษตรกร</h3>
-                <p class="card-description">
+                <h3 class="text-lg font-semibold primary-text mb-3">ฐานข้อมูลเกษตรกร</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
                     ระบบจัดการข้อมูลประวัติเกษตรกร พื้นที่ปลูกหม่อนเลี้ยงไหม และการเข้าร่วมโครงการต่างๆ เพื่อการติดตามและสนับสนุนอย่างทั่วถึง
                 </p>
             </div>
 
-            <!-- System 2 -->
-            <div class="system-card">
-                <div class="card-icon-wrapper">
-                    <i class="fa-solid fa-boxes-stacked icon"></i>
+            <!-- Card 2 -->
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white flex flex-col items-center text-center transform transition-transform hover:scale-105">
+                <div class="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center text-2xl mb-4">
+                    <i class="fa-solid fa-boxes-stacked"></i>
                 </div>
-                <h3 class="card-title">ระบบบริหารคลังไข่ไหม</h3>
-                <p class="card-description">
+                <h3 class="text-lg font-semibold primary-text mb-3">ระบบบริหารคลังไข่ไหม</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
                     ระบบบริหารจัดการและติดตามสถานะคลังไข่ไหม การรับเข้า การเบิกจ่าย และควบคุมปริมาณคงคลังให้มีประสิทธิภาพสูงสุด
                 </p>
             </div>
 
-            <!-- System 3 -->
-            <div class="system-card">
-                <div class="card-icon-wrapper">
-                    <i class="fa-solid fa-calculator icon"></i>
+            <!-- Card 3 -->
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white flex flex-col items-center text-center transform transition-transform hover:scale-105">
+                <div class="w-14 h-14 bg-purple-50 primary-text rounded-full flex items-center justify-center text-2xl mb-4">
+                    <i class="fa-solid fa-calculator"></i>
                 </div>
-                <h3 class="card-title">ระบบคำนวณการเก็บไข่ไหม</h3>
-                <p class="card-description">
-                    เครื่องมือช่วยคำนวณและพยากรณ์ผลผลิต การเก็บเกี่ยวไข่ไหมตามรอบการเลี้ยง เพื่อวางแผนการผลิตได้อย่างแม่นยำ
+                <h3 class="text-lg font-semibold primary-text mb-3">ระบบคำนวณการเก็บไข่ไหม</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    เครื่องมือช่วยคำนวณและพยากรณ์ผลผลิตการเก็บเกี่ยวไข่ไหมตามรอบการเลี้ยง เพื่อวางแผนการผลิตได้อย่างแม่นยำ
                 </p>
             </div>
-        </main>
-        
-        <footer class="footer">
-            <p>&copy; 2026 ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่ | กรมหม่อนไหม กระทรวงเกษตรและสหกรณ์</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto py-6 text-center text-xs md:text-sm text-gray-400 w-full">
+            © 2026 ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่ | กรมหม่อนไหม กระทรวงเกษตรและสหกรณ์
         </footer>
     </div>
 
-    <!-- DASHBOARD VIEW -->
-    <div id="dashboard-view" class="dashboard-container view-hidden">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <i class="fa-solid fa-leaf"></i>
-                <span>ศูนย์หม่อนไหมฯ แพร่</span>
+    <!-- ==================== หน้า App View (แสดงเมื่อเข้าระบบ) ==================== -->
+    <div id="app-view" class="hidden h-screen flex flex-col w-full bg-white relative">
+        
+        <!-- Top Navigation Bar -->
+        <div class="primary-bg text-white h-16 flex items-center justify-between px-4 shadow-md z-20 flex-shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSidebar()" class="text-white hover:bg-white/20 p-2 rounded-lg transition-colors focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-leaf hidden sm:block"></i>
+                    <span id="current-app-title" class="font-semibold text-lg truncate max-w-[200px] sm:max-w-md">หน้าต่างระบบ</span>
+                </div>
             </div>
-            <nav class="sidebar-nav">
-                <button class="nav-item active" data-sys="farmer">
-                    <i class="fa-solid fa-users"></i>
-                    <span>ฐานข้อมูลเกษตรกร</span>
-                </button>
-                <button class="nav-item" data-sys="inventory">
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                    <span>ระบบบริหารคลังไข่ไหม</span>
-                </button>
-                <button class="nav-item" data-sys="calculator">
-                    <i class="fa-solid fa-calculator"></i>
-                    <span>ระบบคำนวณการเก็บไข่ไหม</span>
-                </button>
-            </nav>
-            <div class="sidebar-footer">
-                <button id="logout-btn" class="nav-item logout-btn">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>กลับหน้าหลัก</span>
+            
+            <button onclick="backToHome()" class="text-sm bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-house"></i> <span class="hidden sm:inline">หน้าหลัก</span>
+            </button>
+        </div>
+
+        <!-- Sidebar (Drawer) -->
+        <div id="sidebar-overlay" onclick="closeSidebar()" class="fixed inset-0 bg-black/50 z-30 hidden transition-opacity"></div>
+        <div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+            <!-- Sidebar Header -->
+            <div class="h-16 primary-bg text-white flex items-center justify-between px-4">
+                <span class="font-semibold"><i class="fa-solid fa-bars-staggered mr-2"></i> เมนูระบบ</span>
+                <button onclick="closeSidebar()" class="text-white hover:bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-        </aside>
-        <main class="dashboard-main">
-            <div class="iframe-container">
-                <!-- Iframe to load the google script -->
-                <iframe id="content-frame" src="about:blank" frameborder="0"></iframe>
+            
+            <!-- Sidebar Menu Items -->
+            <div class="flex-grow overflow-y-auto py-4">
+                <div class="px-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">แอปพลิเคชัน</div>
+                
+                <button onclick="loadIframe('farmerDb', 'ฐานข้อมูลเกษตรกร')" class="w-full text-left px-6 py-4 hover:bg-purple-50 text-gray-700 hover:text-[#6d3264] border-l-4 border-transparent hover:border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none menu-item">
+                    <div class="w-8 flex justify-center"><i class="fa-solid fa-users text-lg"></i></div>
+                    <span class="font-medium">ฐานข้อมูลเกษตรกร</span>
+                </button>
+                
+                <button onclick="loadIframe('stock', 'ระบบบริหารคลังไข่ไหม')" class="w-full text-left px-6 py-4 hover:bg-purple-50 text-gray-700 hover:text-[#6d3264] border-l-4 border-transparent hover:border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none menu-item">
+                    <div class="w-8 flex justify-center"><i class="fa-solid fa-boxes-stacked text-lg"></i></div>
+                    <span class="font-medium">ระบบบริหารคลังไข่ไหม</span>
+                </button>
+                
+                <button onclick="loadIframe('calc', 'ระบบคำนวณการเก็บไข่ไหม')" class="w-full text-left px-6 py-4 hover:bg-purple-50 text-gray-700 hover:text-[#6d3264] border-l-4 border-transparent hover:border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none menu-item">
+                    <div class="w-8 flex justify-center"><i class="fa-solid fa-calculator text-lg"></i></div>
+                    <span class="font-medium">ระบบคำนวณการเก็บไข่ไหม</span>
+                </button>
             </div>
-        </main>
+            
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-gray-100 text-xs text-center text-gray-400">
+                ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่
+            </div>
+        </div>
+
+        <!-- Iframe Container -->
+        <div class="flex-grow relative w-full h-full bg-gray-50 overflow-hidden">
+            <!-- Loading Indicator -->
+            <div id="loader-container" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
+                <div class="loader mb-4"></div>
+                <p class="text-gray-500 text-sm">กำลังโหลดระบบ...</p>
+            </div>
+            <!-- Iframe -->
+            <iframe id="main-iframe" src="" class="w-full h-full border-0"></iframe>
+        </div>
+
     </div>
 
-    <script src="script.js"></script>
+    <!-- ==================== JavaScript ==================== -->
+    <script>
+        // เปลี่ยนวิธีการซ่อนลิงก์จาก Base64 เป็น CharCode Array เพื่อป้องกันการถอดรหัสผิดพลาด 100% ในทุกเบราว์เซอร์
+        const encodedLinks = {
+            'farmerDb': [104,116,116,112,115,58,47,47,115,99,114,105,112,116,46,103,111,111,103,108,101,46,99,111,109,47,109,97,99,114,111,115,47,115,47,65,75,102,121,99,98,120,104,54,48,78,73,69,71,74,85,72,85,85,89,106,51,75,119,83,68,114,90,74,110,73,45,73,98,72,87,52,97,101,67,114,112,104,105,120,105,98,76,117,78,49,110,102,111,101,110,119,101,108,71,106,101,80,80,52,103,55,79,53,75,118,90,47,101,120,101,99],
+            'stock': [104,116,116,112,115,58,47,47,115,99,114,105,112,116,46,103,111,111,103,108,101,46,99,111,109,47,109,97,99,114,111,115,47,115,47,65,75,102,121,99,98,120,45,53,103,74,68,109,68,120,73,84,52,82,90,76,51,116,68,100,104,86,106,56,113,51,104,79,105,103,112,108,72,77,87,71,77,98,112,99,69,89,119,78,67,114,121,101,101,104,70,108,66,98,108,116,82,48,88,107,115,113,70,78,90,90,77,47,101,120,101,99],
+            'calc': [104,116,116,112,115,58,47,47,115,99,114,105,112,116,46,103,111,111,103,108,101,46,99,111,109,47,109,97,99,114,111,115,47,115,47,65,75,102,121,99,98,119,68,108,107,85,101,76,102,54,108,70,77,121,83,67,88,80,81,55,107,100,57,50,106,79,84,71,65,114,84,84,98,80,113,67,117,110,48,114,113,117,111,82,67,75,73,97,80,49,116,86,105,81,68,115,101,108,74,107,113,51,83,52,115,88,77,68,65,47,101,120,101,99]
+        };
+
+        // ฟังก์ชันถอดรหัส URL แบบใหม่
+        function getDecodedUrl(key) {
+            try {
+                return String.fromCharCode.apply(null, encodedLinks[key]);
+            } catch (e) {
+                console.error("Error decoding URL");
+                return "";
+            }
+        }
+
+        // Element References
+        const landingView = document.getElementById('landing-view');
+        const appView = document.getElementById('app-view');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const mainIframe = document.getElementById('main-iframe');
+        const currentAppTitle = document.getElementById('current-app-title');
+        const loaderContainer = document.getElementById('loader-container');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // ฟังก์ชันเมื่อกดปุ่ม "เข้าสู่ระบบ"
+        function enterSystem() {
+            // ซ่อนหน้า Landing แสดงหน้า App
+            landingView.classList.add('hidden');
+            appView.classList.remove('hidden');
+            
+            // โหลดหน้าฐานข้อมูลเกษตรกร เป็นหน้าแรก
+            loadIframe('farmerDb', 'ฐานข้อมูลเกษตรกร');
+        }
+
+        // ฟังก์ชันกลับหน้าหลัก
+        function backToHome() {
+            mainIframe.src = "about:blank"; // เคลียร์ iframe
+            appView.classList.add('hidden');
+            landingView.classList.remove('hidden');
+        }
+
+        // ฟังก์ชันโหลดข้อมูลลง Iframe
+        function loadIframe(appKey, title) {
+            // แสดง Loader
+            loaderContainer.classList.remove('hidden');
+            
+            // อัปเดต Title
+            currentAppTitle.innerText = title;
+            
+            // ดึง URL ที่ถอดรหัสแล้วใส่ใน iframe
+            mainIframe.src = getDecodedUrl(appKey);
+            
+            // ไฮไลต์เมนูที่เลือก (Visual feedback)
+            menuItems.forEach(item => {
+                item.classList.remove('bg-purple-100', 'border-[#6d3264]');
+                if(item.innerText.includes(title)) {
+                    item.classList.add('bg-purple-100', 'border-[#6d3264]');
+                }
+            });
+
+            // ปิด Sidebar อัตโนมัติหลังจากเลือกเมนู
+            closeSidebar();
+        }
+
+        // ซ่อน Loader เมื่อ Iframe โหลดเสร็จ
+        function hideLoader() {
+            // ป้องกันการทำงานกรณี src ว่างเปล่า
+            if(mainIframe.src && mainIframe.src !== "about:blank" && mainIframe.src !== window.location.href) {
+                loaderContainer.classList.add('hidden');
+            }
+        }
+
+        // ผูก Event Listener แทนการใช้ onload ในแท็ก HTML เพื่อป้องกัน ReferenceError
+        mainIframe.addEventListener('load', hideLoader);
+
+        // เปิด-ปิด Sidebar
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        }
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            // ห้ามเลื่อนหน้าจอด้านหลัง
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            // คืนค่าการเลื่อนหน้าจอ
+            document.body.style.overflow = '';
+        }
+    </script>
 </body>
 </html>
