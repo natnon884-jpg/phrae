@@ -15,7 +15,7 @@
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- 
+
     <style>
         body {
             font-family: 'Kanit', sans-serif;
@@ -31,17 +31,17 @@
             color: #333;
             overflow-x: hidden;
         }
- 
+
         .primary-bg { background-color: #6d3264; }
         .primary-text { color: #6d3264; }
         .primary-hover:hover { background-color: #55254d; }
- 
+
         /* Custom Scrollbar สำหรับ iframe และ Sidebar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #c5a3c0; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #6d3264; }
- 
+
         /* Iframe loading animation */
         .loader {
             border: 4px solid #f3f3f3;
@@ -55,7 +55,7 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
- 
+
     <!-- ==================== หน้า Landing Page (หน้าแรก) ==================== -->
     <div id="landing-view" class="flex-grow flex flex-col items-center justify-center p-4 md:p-8 transition-opacity duration-500">
         
@@ -67,7 +67,7 @@
             <h1 class="text-2xl md:text-3xl font-semibold primary-text mb-2">ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่</h1>
             <p class="text-gray-500 text-sm md:text-base">Phrae Queen Sirikit Sericulture Center</p>
         </div>
- 
+
         <!-- Intro Box -->
         <div class="bg-white/80 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-2xl p-6 max-w-3xl text-center mb-8 border border-white/50">
             <p class="text-gray-600 text-sm md:text-base leading-relaxed">
@@ -76,12 +76,12 @@
                 ประสิทธิภาพ รวดเร็ว และแม่นยำ
             </p>
         </div>
- 
+
         <!-- Login Button -->
         <button onclick="enterSystem()" class="primary-bg primary-hover text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2 mb-12">
             เข้าสู่ระบบ (Enter System) <i class="fa-solid fa-arrow-right-to-bracket"></i>
         </button>
- 
+
         <!-- Feature Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full mb-10">
             <!-- Card 1 -->
@@ -94,7 +94,7 @@
                     ระบบจัดการข้อมูลประวัติเกษตรกร พื้นที่ปลูกหม่อนเลี้ยงไหม และการเข้าร่วมโครงการต่างๆ เพื่อการติดตามและสนับสนุนอย่างทั่วถึง
                 </p>
             </div>
- 
+
             <!-- Card 2 -->
             <div class="bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white flex flex-col items-center text-center transform transition-transform hover:scale-105">
                 <div class="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center text-2xl mb-4">
@@ -105,7 +105,7 @@
                     ระบบบริหารจัดการและติดตามสถานะคลังไข่ไหม การรับเข้า การเบิกจ่าย และควบคุมปริมาณคงคลังให้มีประสิทธิภาพสูงสุด
                 </p>
             </div>
- 
+
             <!-- Card 3 -->
             <div class="bg-white/90 backdrop-blur-md rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white flex flex-col items-center text-center transform transition-transform hover:scale-105">
                 <div class="w-14 h-14 bg-purple-50 primary-text rounded-full flex items-center justify-center text-2xl mb-4">
@@ -117,13 +117,13 @@
                 </p>
             </div>
         </div>
- 
+
         <!-- Footer -->
         <footer class="mt-auto py-6 text-center text-xs md:text-sm text-gray-400 w-full">
             © 2026 ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่ | กรมหม่อนไหม กระทรวงเกษตรและสหกรณ์
         </footer>
     </div>
- 
+
     <!-- ==================== หน้า App View (แสดงเมื่อเข้าระบบ) ==================== -->
     <div id="app-view" class="hidden h-screen flex flex-col w-full bg-white relative">
         
@@ -143,7 +143,7 @@
                 <i class="fa-solid fa-house"></i> <span class="hidden sm:inline">หน้าหลัก</span>
             </button>
         </div>
- 
+
         <!-- Sidebar (Drawer) -->
         <div id="sidebar-overlay" onclick="closeSidebar()" class="fixed inset-0 bg-black/50 z-30 hidden transition-opacity"></div>
         <div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
@@ -203,7 +203,7 @@
                 ศูนย์หม่อนไหมเฉลิมพระเกียรติฯ แพร่
             </div>
         </div>
- 
+
         <!-- Iframe Container -->
         <div class="flex-grow relative w-full h-full bg-gray-50 overflow-hidden">
             <!-- Loading Indicator -->
@@ -214,9 +214,9 @@
             <!-- Iframe -->
             <iframe id="main-iframe" src="" class="w-full h-full border-0"></iframe>
         </div>
- 
+
     </div>
- 
+
     <!-- ==================== JavaScript ==================== -->
     <script>
         // เปลี่ยนวิธีการซ่อนลิงก์จาก Base64 เป็น CharCode Array เพื่อป้องกันการถอดรหัสผิดพลาด
@@ -224,16 +224,16 @@
             // https://script.google.com/macros/s/AKfycby-O9eFGSJLjI7eNKLbsenPsl74Ufowg8t-I0ic78a8ODr50fDfE_N1o4rlg4IGxxw7/exec
             'farmerDb': [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 121, 45, 79, 57, 101, 70, 71, 83, 74, 76, 106, 73, 55, 101, 78, 75, 76, 98, 115, 101, 110, 80, 115, 108, 55, 52, 85, 102, 111, 119, 103, 56, 116, 45, 73, 48, 105, 99, 55, 56, 97, 56, 79, 68, 114, 53, 48, 102, 68, 102, 69, 95, 78, 49, 111, 52, 114, 108, 103, 52, 73, 71, 120, 120, 119, 55, 47, 101, 120, 101, 99],
             
-            // https://script.google.com/macros/s/AKfycbxSQQ8AWoJ57-GKRf39iTEvj5B8MVPjVfnMjvYaIUzeOMSpg-K2b6iVPUXg_JEoep-W/exec
-            'stockGood': [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 120, 83, 81, 81, 56, 65, 87, 111, 74, 53, 55, 45, 71, 75, 82, 102, 51, 57, 105, 84, 69, 118, 106, 53, 66, 56, 77, 86, 80, 106, 86, 102, 110, 77, 106, 118, 89, 97, 73, 85, 122, 101, 79, 77, 83, 112, 103, 45, 75, 50, 98, 54, 105, 86, 80, 85, 88, 103, 95, 74, 69, 111, 101, 112, 45, 87, 47, 101, 120, 101, 99],
+            // อัปเดตใหม่: https://script.google.com/macros/s/AKfycbxFhistZ-CkMG9CZIeJBDK4ZWB0B7YxTeSvRFkv86Ovb5leUQDHwnkS7ub4JcNOGhyj/exec
+            'stockGood': [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 120, 70, 104, 105, 115, 116, 90, 45, 67, 107, 77, 71, 57, 67, 90, 73, 101, 74, 66, 68, 75, 52, 90, 87, 66, 48, 66, 55, 89, 120, 84, 101, 83, 118, 82, 70, 107, 118, 56, 54, 79, 118, 98, 53, 108, 101, 85, 81, 68, 72, 119, 110, 107, 83, 55, 117, 98, 52, 74, 99, 78, 79, 71, 104, 121, 106, 47, 101, 120, 101, 99],
             
-            // https://script.google.com/macros/s/AKfycbwz9txJDCO71IWU566dxgHbLVMClsWMUmTYUbTALyXSEUz2adHsvuSseFFtpgH0XDQ8/exec
-            'stockExpand': [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 119, 122, 57, 116, 120, 74, 68, 67, 79, 55, 49, 73, 87, 85, 53, 54, 54, 100, 120, 103, 72, 98, 76, 86, 77, 67, 108, 115, 87, 77, 85, 109, 84, 89, 85, 98, 84, 65, 76, 121, 88, 83, 69, 85, 122, 50, 97, 100, 72, 115, 118, 117, 83, 115, 101, 70, 70, 116, 112, 103, 72, 48, 88, 68, 81, 56, 47, 101, 120, 101, 99],
+            // อัปเดตใหม่: https://script.google.com/macros/s/AKfycbwMxZzMGdy3ydB-W2hT7gW5iMvrugNDYk7oxvmOa2WVIXfD-3s2IeIgU28E0UggfD6C/exec
+            'stockExpand': [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 119, 77, 120, 90, 122, 77, 71, 100, 121, 51, 121, 100, 66, 45, 87, 50, 104, 84, 55, 103, 87, 53, 105, 77, 118, 114, 117, 103, 78, 68, 89, 107, 55, 111, 120, 118, 109, 79, 97, 50, 87, 86, 73, 88, 102, 68, 45, 51, 115, 50, 73, 101, 73, 103, 85, 50, 56, 69, 48, 85, 103, 103, 102, 68, 54, 67, 47, 101, 120, 101, 99],
             
             // https://script.google.com/macros/s/AKfycbzOO0YSVJibaGsfKv0jUm22Rd0c_u9OSZ18pEpdkwIhp7QNVwGXpS225dsg71gQP4Bc_Q/exec
             'calc': [104, 116, 116, 112, 115, 58, 47, 47, 115, 99, 114, 105, 112, 116, 46, 103, 111, 111, 103, 108, 101, 46, 99, 111, 109, 47, 109, 97, 99, 114, 111, 115, 47, 115, 47, 65, 75, 102, 121, 99, 98, 122, 79, 79, 48, 89, 83, 86, 74, 105, 98, 97, 71, 115, 102, 75, 118, 48, 106, 85, 109, 50, 50, 82, 100, 48, 99, 95, 117, 57, 79, 83, 90, 49, 56, 112, 69, 112, 100, 107, 119, 73, 104, 112, 55, 81, 78, 86, 119, 71, 88, 112, 83, 50, 50, 53, 100, 115, 103, 55, 49, 103, 81, 80, 52, 66, 99, 95, 81, 47, 101, 120, 101, 99]
         };
- 
+
         // ฟังก์ชันถอดรหัส URL
         function getDecodedUrl(key) {
             try {
@@ -243,7 +243,7 @@
                 return "";
             }
         }
- 
+
         // Element References
         const landingView = document.getElementById('landing-view');
         const appView = document.getElementById('app-view');
@@ -254,7 +254,7 @@
         const loaderContainer = document.getElementById('loader-container');
         // ค้นหาทุกเมนูที่มีคลาส menu-item เพื่อจัดการเรื่องไฮไลต์สี
         const menuItems = document.querySelectorAll('.menu-item');
- 
+
         // ฟังก์ชันเมื่อกดปุ่ม "เข้าสู่ระบบ"
         function enterSystem() {
             landingView.classList.add('hidden');
@@ -262,14 +262,14 @@
             // โหลดหน้าฐานข้อมูลเกษตรกร เป็นหน้าแรก
             loadIframe('farmerDb', 'ฐานข้อมูลเกษตรกร');
         }
- 
+
         // ฟังก์ชันกลับหน้าหลัก
         function backToHome() {
             mainIframe.src = "about:blank"; // เคลียร์ iframe
             appView.classList.add('hidden');
             landingView.classList.remove('hidden');
         }
- 
+
         // ฟังก์ชันสำหรับสลับการแสดงผลเมนูย่อย
         function toggleSubMenu(submenuId) {
             const submenu = document.getElementById(submenuId);
@@ -287,7 +287,7 @@
                 if(icon) icon.classList.remove('rotate-180');
             }
         }
- 
+
         // ฟังก์ชันโหลดข้อมูลลง Iframe
         function loadIframe(appKey, title) {
             // แสดง Loader
@@ -313,21 +313,21 @@
                     }
                 }
             });
- 
+
             // ปิด Sidebar อัตโนมัติหลังจากเลือกเมนู
             closeSidebar();
         }
- 
+
         // ซ่อน Loader เมื่อ Iframeโหลดเสร็จ
         function hideLoader() {
             if(mainIframe.src && mainIframe.src !== "about:blank" && mainIframe.src !== window.location.href) {
                 loaderContainer.classList.add('hidden');
             }
         }
- 
+
         // ผูก Event Listener
         mainIframe.addEventListener('load', hideLoader);
- 
+
         // เปิด-ปิด Sidebar
         function toggleSidebar() {
             const isClosed = sidebar.classList.contains('-translate-x-full');
@@ -337,13 +337,13 @@
                 closeSidebar();
             }
         }
- 
+
         function openSidebar() {
             sidebar.classList.remove('-translate-x-full');
             sidebarOverlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
- 
+
         function closeSidebar() {
             sidebar.classList.add('-translate-x-full');
             sidebarOverlay.classList.add('hidden');
