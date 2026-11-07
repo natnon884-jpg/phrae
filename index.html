@@ -124,7 +124,7 @@
                 </button>
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-leaf hidden sm:block"></i>
-                    <span id="current-app-title" class="font-semibold text-lg truncate max-w-[200px] sm:max-w-md">ระบบบริหารคลังไข่ไหม</span>
+                    <span id="current-app-title" class="font-semibold text-lg truncate max-w-[200px] sm:max-w-md">หน้าต่างระบบ</span>
                 </div>
             </div>
             
@@ -147,10 +147,22 @@
             <div class="flex-grow overflow-y-auto py-4">
                 <div class="px-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">แอปพลิเคชัน</div>
                 
-                <!-- เมนูเดียว: ระบบบริหารคลังไข่ไหม -->
-                <button onclick="closeSidebar()" class="w-full text-left px-6 py-4 bg-purple-50 text-[#6d3264] border-l-4 border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none">
+                <!-- เมนู 1: ฐานข้อมูลเกษตรกร -->
+                <button id="btn-farmerDb" onclick="loadApp('farmerDb', 'ฐานข้อมูลเกษตรกร', this)" class="menu-item w-full text-left px-6 py-4 hover:bg-purple-50 text-gray-700 hover:text-[#6d3264] border-l-4 border-transparent hover:border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none">
+                    <div class="w-8 flex justify-center"><i class="fa-solid fa-users text-lg"></i></div>
+                    <span class="font-medium">ฐานข้อมูลเกษตรกร</span>
+                </button>
+
+                <!-- เมนู 2: ระบบบริหารคลังไข่ไหม (ใช้ URL ใหม่) -->
+                <button id="btn-stock" onclick="loadApp('stock', 'ระบบบริหารคลังไข่ไหม', this)" class="menu-item w-full text-left px-6 py-4 hover:bg-purple-50 text-gray-700 hover:text-[#6d3264] border-l-4 border-transparent hover:border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none">
                     <div class="w-8 flex justify-center"><i class="fa-solid fa-boxes-stacked text-lg"></i></div>
                     <span class="font-medium">ระบบบริหารคลังไข่ไหม</span>
+                </button>
+
+                <!-- เมนู 3: ระบบคำนวณการเก็บไข่ไหม -->
+                <button id="btn-calc" onclick="loadApp('calc', 'ระบบคำนวณการเก็บไข่ไหม', this)" class="menu-item w-full text-left px-6 py-4 hover:bg-purple-50 text-gray-700 hover:text-[#6d3264] border-l-4 border-transparent hover:border-[#6d3264] transition-all flex items-center gap-3 focus:outline-none">
+                    <div class="w-8 flex justify-center"><i class="fa-solid fa-calculator text-lg"></i></div>
+                    <span class="font-medium">ระบบคำนวณการเก็บไข่ไหม</span>
                 </button>
             </div>
             
@@ -161,7 +173,7 @@
 
         <!-- Iframe Container -->
         <div class="flex-grow relative w-full h-full bg-gray-50 overflow-hidden">
-            <div id="loader-container" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
+            <div id="loader-container" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10 hidden">
                 <div class="loader mb-4"></div>
                 <p class="text-gray-500 text-sm">กำลังโหลดระบบ...</p>
             </div>
@@ -170,33 +182,63 @@
 
     </div>
 
-    <!-- ==================== JavaScript ที่ปรับแก้ให้ทำงานง่ายและชัวร์ 100% ==================== -->
+    <!-- ==================== JavaScript ==================== -->
     <script>
-        // ใส่ URL ที่คุณต้องการตรงนี้
-        const APP_URL = "https://script.google.com/macros/s/AKfycbyghm3VuYtPg5FB4PfDzBUCn5lw3rqO3Qz1sZEhHmcuGKBjddx5tMw90ykq3Zi_4nOY/exec";
+        // รวม URL ของทั้ง 3 ระบบ (URL ตรงๆ ไม่ต้องเข้ารหัส)
+        const appUrls = {
+            'farmerDb': 'https://script.google.com/macros/s/AKfycby-O9eFGSJLjI7eNKLbsenPsl74Ufowg8t-I0ic78a8ODr50fDfE_N1o4rlg4IGxxw7/exec',
+            'stock': 'https://script.google.com/macros/s/AKfycbyghm3VuYtPg5FB4PfDzBUCn5lw3rqO3Qz1sZEhHmcuGKBjddx5tMw90ykq3Zi_4nOY/exec',
+            'calc': 'https://script.google.com/macros/s/AKfycbzOO0YSVJibaGsfKv0jUm22Rd0c_u9OSZ18pEpdkwIhp7QNVwGXpS225dsg71gQP4Bc_Q/exec'
+        };
 
-        // ฟังก์ชันเมื่อกดปุ่ม "เข้าสู่ระบบ"
+        // ฟังก์ชันเมื่อกดปุ่ม "เข้าสู่ระบบ" จากหน้าแรก
         function enterSystem() {
-            // 1. สลับหน้า
             document.getElementById('landing-view').classList.add('hidden');
             document.getElementById('app-view').classList.remove('hidden');
             
-            // 2. โหลด URL ลงใน iframe
+            // โหลดระบบแรกคือ 'ฐานข้อมูลเกษตรกร'
+            const firstMenuBtn = document.getElementById('btn-farmerDb');
+            loadApp('farmerDb', 'ฐานข้อมูลเกษตรกร', firstMenuBtn);
+        }
+
+        // ฟังก์ชันสำหรับโหลดระบบเข้า Iframe
+        function loadApp(appKey, title, btnElement) {
+            // อัปเดตชื่อด้านบน
+            document.getElementById('current-app-title').innerText = title;
+
+            // โหลด iframe
             const iframe = document.getElementById('main-iframe');
             const loader = document.getElementById('loader-container');
             
-            loader.classList.remove('hidden'); // แสดงตัวหมุนๆ
-            iframe.src = APP_URL; // ยิง URL
+            loader.classList.remove('hidden');
+            iframe.src = appUrls[appKey];
             
-            // 3. เมื่อ iframe โหลดเสร็จให้ซ่อนตัวหมุนๆ
+            // เมื่อโหลดเสร็จให้ซ่อน Loader
             iframe.onload = function() {
                 loader.classList.add('hidden');
             };
+
+            // จัดการสีไฮไลต์ของปุ่มเมนูที่ถูกเลือก
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                // ล้างสีสถานะ Active ออกทั้งหมด
+                item.classList.remove('bg-purple-50', 'text-[#6d3264]', 'border-[#6d3264]');
+                item.classList.add('text-gray-700', 'border-transparent');
+            });
+            
+            // เพิ่มสีสถานะ Active ให้ปุ่มที่เพิ่งกด
+            if(btnElement) {
+                btnElement.classList.remove('text-gray-700', 'border-transparent');
+                btnElement.classList.add('bg-purple-50', 'text-[#6d3264]', 'border-[#6d3264]');
+            }
+
+            // ปิดแถบด้านข้าง
+            closeSidebar();
         }
 
-        // ฟังก์ชันกลับหน้าแรก
+        // ฟังก์ชันกลับหน้าหลัก
         function backToHome() {
-            document.getElementById('main-iframe').src = "about:blank"; // เคลียร์หน้าจอ
+            document.getElementById('main-iframe').src = "about:blank"; // เคลียร์เนื้อหา
             document.getElementById('app-view').classList.add('hidden');
             document.getElementById('landing-view').classList.remove('hidden');
         }
